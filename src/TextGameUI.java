@@ -18,6 +18,8 @@ public class TextGameUI {
         // Create a text area for displaying game text
         textArea = new JTextArea();
         textArea.setEditable(false);
+        textArea.setBackground(Color.BLACK);
+        textArea.setForeground(Color.WHITE);
         frame.add(new JScrollPane(textArea), BorderLayout.CENTER);
 
         // Create an input field for player commands
@@ -26,13 +28,15 @@ public class TextGameUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Get the player's input
-                String input = inputField.getText();
+                String inputF = inputField.getText();
                 // Process the input (e.g., send it to your game logic)
-                processInput(input);
+                processInput(inputF);
                 // Clear the input field
                 inputField.setText("");
             }
         });
+        inputField.setBackground(Color.BLACK);
+        inputField.setForeground(Color.MAGENTA);
         frame.add(inputField, BorderLayout.SOUTH);
 
         // Set the frame to be visible
@@ -49,4 +53,21 @@ public class TextGameUI {
         // Example: Display the player's input in the UI
         displayText("Player input: " + input);
     }
+
+	public JTextArea getTextArea() {
+		return textArea;
+	}
+
+	public void setTextArea(JTextArea textArea) {
+		this.textArea = textArea;
+	}
+
+	public JTextField getInputField() {
+		return inputField;
+	}
+
+	public void setInputField(JTextField inputField) {
+		this.inputField = inputField;
+	}
+	
 }

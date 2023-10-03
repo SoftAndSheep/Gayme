@@ -1,10 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Room {
 	private String name;
 	private String description;
-	private List<Item> item;
+	private List<Itemlist> itemInRoom = new ArrayList<>();
 	private Room north;
 	private Room south;
 	private Room west;
@@ -14,7 +15,7 @@ public class Room {
 	public Room (String name, String description) {
 		this.name = name;
 		this.description = description;
-		this.item = new ArrayList<>();
+		this.itemInRoom = new ArrayList<>();
 		
 	}
 //getters and setters important to change stuff for game purposes
@@ -26,13 +27,21 @@ public class Room {
 		return description;
 	}
 	
-	
 
-	public boolean hasItem(String itemName) {
-		return false;
-		
-    
+	public List<Itemlist> getItems() {
+    return itemInRoom;
 	}
+	
+	public String printInventory(Map<Itemlist, Item> items) {
+		String irgend = "you see:\n";
+		for(int i = 0; i < itemInRoom.size(); i++) {
+			Item itemObj = items.get(itemInRoom.get(i));
+			irgend += (i+1) + ". " + itemObj.getName() + "\n";
+		}
+		return irgend;
+	}
+	
+	
 	
 	public void setNorth(Room northRoom) {
 		this.north = northRoom;

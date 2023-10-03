@@ -1,17 +1,19 @@
 import java.util.Objects;
 
 public class Book extends Item {
-
-	private String title;
 	private String content;
 	
 	public Book(String title) {
+		super(title);
 		this.content = "";
-		this.title = title;
 	}
 	
 	public Book(String title, String content) {
-		this.title = title;
+		super(title);
+		this.content = content;
+	}
+	public Book(String title, String content, boolean isQuestItem) {
+		super(title, isQuestItem);
 		this.content = content;
 	}
 	
@@ -21,12 +23,14 @@ public class Book extends Item {
 		System.out.println(getContent());
 	}
 	
-	public void yeet() {
-		System.out.println("You threw a book. It was mildy effective...");
-	}
-	
-	public String getTitle() {
-		return title;
+	@Override
+	public boolean yeet() {
+		if(!isQuestItem()) {
+			System.out.println("You yeeted a book. It was mildy effective...");
+			return true;
+		}else {
+			return super.yeet();
+		}
 	}
 	
 	public String getContent() {
@@ -39,12 +43,12 @@ public class Book extends Item {
 			return false;
 		}
 		final Book otherBook = (Book) obj;
-		return this.title.equals(otherBook.title) && this.content.equals(otherBook.content);
+		return super.equals(obj) && this.content.equals(otherBook.content);
 	}
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(this.title, this.content);
+		return super.hashCode() + Objects.hash(this.content);
 	}
 	
 

@@ -2,9 +2,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-public class Jojo extends TextGameUI{
+public class Jojo{
+
 
 	private Player player;
 	private Map<String, Room> rooms;
@@ -20,6 +24,8 @@ public class Jojo extends TextGameUI{
 	}
 
 	public void play() {
+		TextGameUI UI = new TextGameUI();
+		
 		Scanner scanner = new Scanner(System.in);
 
 		System.out.println("Welcome to my first Text Adventure");
@@ -34,12 +40,10 @@ public class Jojo extends TextGameUI{
 				System.out.println("Goodbye!");
 				break;
 				
+			}else if (UI.getInputText().equals("w"))	{
 				
-			} else if ( input.equals("whatever") ) {
-				
-				getTextArea().append("bye bye\n");
-				System.out.println("Goodbye!");
-				
+			 System.out.println("yaay it works");
+			 UI.getTextArea().append("yay it works");
 				
 				
 			} else if (input.startsWith("go ")) {
@@ -58,7 +62,8 @@ public class Jojo extends TextGameUI{
 				}
 			} else if (input.equals("look around")) {
 				System.out.println(player.getCurrentRoom().printInventory(items));
-				getTextArea().append(player.getCurrentRoom().printInventory(items));
+				UI.getTextArea().append(player.getCurrentRoom().printInventory(items));
+			
 			} else if (input.startsWith("take ")) {
 				int itemNumb = Integer.valueOf(input.substring(5));
 				Room currentRoom = player.getCurrentRoom();
@@ -70,11 +75,10 @@ public class Jojo extends TextGameUI{
 				}
 			} else if (input.equals("inventory")) {
 				System.out.println(player.printInventory(items));
-				getTextArea().append(player.printInventory(items));
+				UI.getTextArea().append(player.printInventory(items));
 
 			} else {
 				System.out.println("I dont understand that command");
-				getTextArea().append("lol\n");
 			}
 		}
 	}
